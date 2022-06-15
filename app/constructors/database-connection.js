@@ -3,7 +3,7 @@ const dbConfig = require("../config/database-configurations");
 const util = require('util');
 
 // Create a connection to the database
-const connection = mysql.createPool({
+const connection = mysql.createConnection({
   connectionLimit: 10,
   host: dbConfig.HOST,
   user: dbConfig.USER,
@@ -11,29 +11,12 @@ const connection = mysql.createPool({
   database: dbConfig.DB,
   port: '5000'                       // linux did'n need to initialize port ir 3306
 });
+connection.connect(function(err) {
+  if (err) throw err;
+  console.log('Database is connected successfully !');
+});
 
 
-// open the MySQL Pool connection
-connection.getConnection((err, connection) => {
-  if (err) {
-    if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-      console.error('Database connection was closed.')
-    }
-    if (err.code === 'ER_CON_COUNT_ERROR') {
-      console.error('Database has too many connections.')
-    }
-    if (err.code === 'ECONNREFUSED') {
-      console.error('Database connection was refused.')
-    }
-  }
-
-  if (connection) connection.release()
-  console.log("Database connected...");
-
-  return
-})
-
-// Promisify for Node.js async/await.
 connection.query = util.promisify(connection.query)
 
 
