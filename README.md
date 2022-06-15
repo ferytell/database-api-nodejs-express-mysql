@@ -33,13 +33,13 @@ npm start
 
 to test it I using postman
 
-![image](https://imgur.com/JyWTrpc)
+![image](https://i.imgur.com/JyWTrpc.png)
 
 this able to GET, POST, PUT, and DELETE
-![image](https://imgur.com/fe8uAA0)
-![image](https://imgur.com/Y6CAK7G)
-![image](https://imgur.com/RIUyMXW)
-![image](https://imgur.com/4MHNT1F)
+![image](https://i.imgur.com/fe8uAA0.png)
+![image](https://i.imgur.com/Y6CAK7G.png)
+![image](https://i.imgur.com/RIUyMXW.png)
+![image](https://i.imgur.com/4MHNT1F.png)
 
  
 just tell me if there's any problem or something thanks
