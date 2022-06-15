@@ -5,15 +5,15 @@ const sql = require("./database-connection");
 const Article = function(article) {
   this.article = article.article;
   this.mksa = article.mksa;
-  this.score1 = article.score1;
-  this.score2 = article.score2;
-  this.score3 = article.score3;
+//  this.score1 = article.score1;
+//  this.score2 = article.score2;
+//  this.score3 = article.score3;
 };
 
 //---------------------------------- POST Constructor -----------------------
 
 Article.create = (newArticle, result) => {
-  sql.query("INSERT INTO articles SET ?", newArticle, (err, res) => {
+  sql.query("INSERT INTO articles2 SET ?", newArticle, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -27,7 +27,7 @@ Article.create = (newArticle, result) => {
 //---------------------------------- GET Constructor -------------------------
 
 Article.getAll = (score1, result) => {
-  let query = "SELECT * FROM articles";
+  let query = "SELECT * FROM articles2";
   if (score1) {
     query += ` WHERE score1 > '%${score1}%'`;
   }
@@ -45,7 +45,7 @@ Article.getAll = (score1, result) => {
 //--------------------------------------------------------
 
 Article.findById = (id, result) => {
-  sql.query(`SELECT * FROM articles WHERE article_id = ${id}`, (err, res) => {
+  sql.query(`SELECT * FROM articles2 WHERE articleid = ${id}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -64,7 +64,7 @@ Article.findById = (id, result) => {
 //-----------------------------------------------------------
 
 Article.getTheLatest = result => {
-  sql.query("SELECT article, mksa, score1, score2, score3 FROM articles WHERE created_at = (SELECT MAX(created_at) FROM articles)", (err, res) => {
+  sql.query("SELECT article, mksa FROM articles2 WHERE created_at = (SELECT MAX(created_at) FROM articles2)", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -79,8 +79,8 @@ Article.getTheLatest = result => {
 
 Article.updateById = (id, article, result) => {
   sql.query(
-    "UPDATE articles SET article = ?, mksa = ?, score1 = ?, score2 = ?, score3 = ? WHERE article_id = ?",
-    [article.content, article.mksa, article.score1, article.score2, article.score3,  id],
+    "UPDATE articles2 SET article = ?, mksa = ? WHERE articleid = ?",
+    [article.content, article.mksa,   id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -101,7 +101,7 @@ Article.updateById = (id, article, result) => {
 //---------------------------------- DELETE Constructor -------------------------
 
 Article.remove = (id, result) => {
-  sql.query("DELETE FROM articles WHERE article_id = ?", id, (err, res) => {
+  sql.query("DELETE FROM articles2 WHERE articleid = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -119,7 +119,22 @@ Article.remove = (id, result) => {
 
 
 Article.removeAll = result => {
-  sql.query("DELETE FROM articles", (err, res) => {
+  sql.query("DELETE FROM articles2", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    console.log(`deleted ${res.affectedRows} articles`);
+    result(null, res);
+  });
+};
+
+
+module.exports = Article;
+
+Article.removeAll = result => {
+  sql.query("DELETE FROM articles2", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

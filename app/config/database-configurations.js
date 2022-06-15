@@ -10,6 +10,6 @@ a2 = ["localhost","root","explosion", "bangkit"]; //using 5000
 module.exports = {
 HOST: a1[0],
 USER: a1[1],
-PASSWORD: a1[2],
+PASSWORD: a2[2],
 DB: a1[3]
 };

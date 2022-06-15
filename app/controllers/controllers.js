@@ -16,10 +16,7 @@ exports.create = (req, res) => {
   // For Create Article in MySQL
   const articles = new Article({
     article: req.body.article,
-    mksa: req.body.mksa,
-    score1: req.body.score1,
-    score2: req.body.score2,
-    score3: req.body.score3
+    mksa: req.body.mksa
   });
   
   // Save Article in the database

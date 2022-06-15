@@ -8,7 +8,8 @@ const connection = mysql.createPool({
   host: dbConfig.HOST,
   user: dbConfig.USER,
   password: dbConfig.PASSWORD,
-  database: dbConfig.DB
+  database: dbConfig.DB,
+  port: '5000'                       // linux did'n need to initialize port ir 3306
 });
 
 

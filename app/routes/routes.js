@@ -37,7 +37,7 @@ module.exports = app => {
   router.get("/latest", Articles.findTheLatest);
 
   // Return a single Article with id
-  router.get("/:id", Articles.findOne);
+  router.get("/:id", Articles.findOne); 
 
   // Update a Article with id
   router.put("/:id", Articles.update);
